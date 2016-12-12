@@ -1,0 +1,7 @@
+integer 1charm, variable1, var2;
+{
+IF (charm>variable1)
+{
+    charm=2;
+}
+}
