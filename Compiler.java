@@ -1,4 +1,4 @@
-package cse340;
+//package cse340;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,54 +14,48 @@ public class Compiler {
 
   private static Vector<Token> tokens;  
   
-  private static ArrayList<String> split(String line) {
+  private static ArrayList<String> split(String line) 
+  {
     // 1. SPLIT THE LINE IN STRINGS (WORDS);
     // 2. INSERT EACH WORD IN THE ARRAY strings
-    ArrayList<String> strings= new ArrayList<String>();
+    ArrayList<String> strings= new ArrayList<>();
     String temp="";
     boolean isInString=false;
     for(int i=0; i<line.length();i++)
     {
     	if(line.charAt(i)=='"')//if double quote detected...
     	{
-    		if(isInString)//if we are already in string
-    		{
-    			temp=temp+line.charAt(i);//add the double quote to the end of the string
-    			isInString=false;//and finish the string
-    		}
-    		isInString=true;//if we are not in string, now we are in string.//completely unrealistic, fix.
+            if(isInString)//if we are already in string
+            {
+                temp=temp+line.charAt(i);//add the double quote to the end of the string
+                isInString=false;//and finish the string
+            }
+            else
+                isInString=true;
     	}
     	if(!Lexer.isDelimiter(line.charAt(i))&&!Lexer.isOperator(line.charAt(i))&&line.charAt(i)!=' '&&line.charAt(i)!='\t'&&line.charAt(i)!='\n'||isInString||line.charAt(i)=='!')
     	{
-    		temp=temp+line.charAt(i);
+            temp=temp+line.charAt(i);
     	}
     	else///I suspect the problem is in this block
     	{
-    		if(temp.length()!=0||line.charAt(i)=='\n')
-    		{
-    		strings.add(temp);
-			temp="";
-			}
-    		if(line.charAt(i)!=' '&&line.charAt(i)!='\t'&&line.charAt(i)!='\n')
-    		{
-    			
-    			if(Lexer.isDelimiter(line.charAt(i))||Lexer.isOperator(line.charAt(i)))
-    			{
-    				/*if(line.charAt(i)=='='&&line.charAt(i-1)=='!')
-    				{
-    					temp=temp+line.charAt(i);
-    					strings.add(temp);
-    					temp="";
-    				}
-    				else*/
-    				strings.add(""+line.charAt(i));
-    			}
-    		}
+            if(temp.length()!=0||line.charAt(i)=='\n')
+            {
+                strings.add(temp);
+                temp="";
+            }
+            if(line.charAt(i)!=' '&&line.charAt(i)!='\t'&&line.charAt(i)!='\n')
+            {
+                if(Lexer.isDelimiter(line.charAt(i))||Lexer.isOperator(line.charAt(i)))
+                {
+                    strings.add(""+line.charAt(i));
+                }
+            }
     	}
     	if((i==line.length()-1)&&!temp.equals(""))
     	{
-    		strings.add(temp);
-			temp="";
+            strings.add(temp);
+            temp="";
     	}
     }
     return strings;
@@ -74,7 +68,7 @@ public class Compiler {
     Writer out = new OutputStreamWriter(new FileOutputStream(args[1]));  
     int totalLexicalErrors = 0;
     int lines=0;
-    tokens=new Vector<Token>();
+    tokens=new Vector<>();
     try 
     {            
       String line = br.readLine(); 
