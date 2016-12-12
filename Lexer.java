@@ -1,9 +1,9 @@
-package cse340;
+//package cse340;
 import java.util.regex.*;
 
 public class Lexer {
  
-  private final static String[] keywords = {"IF", "else", "WHILE", "SWITCH", "CASE", "return", "integer", "float", "void", "char", "string", "boolean", "true", "false", "print"};
+  private final static String[] KEYWORDS = {"IF", "ELSE", "WHILE", "SWITCH", "CASE", "return", "integer", "float", "void", "char", "string", "boolean", "true", "false", "PRINT"};
   
   public static String lexer(String string) {
     // 4. IMPLEMENT THE LEXICAL RULES HERE
@@ -77,7 +77,7 @@ public class Lexer {
 	  								boolean isKeyword=false;
 	  								for(int i=0;i<15;i++)
 	  								{
-	  									if(keywords[i].equals(string))
+	  									if(KEYWORDS[i].equals(string))
 	  										isKeyword=true;					
 	  								}
 	  								if(isKeyword)
@@ -97,18 +97,24 @@ public class Lexer {
 	  
   }
 
-  public static boolean isDelimiter(char c) {
+  public static boolean isDelimiter(char c) 
+  {
      char [] delimiters = {';', ' ', '}','{', '[',']','(',')',',',':'};
-     for (int x=0; x<delimiters.length; x++) {
-      if (c == delimiters[x]) return true;      
+     for (int x=0; x<delimiters.length; x++) 
+     {
+      if (c == delimiters[x])
+          return true;      
      }
      return false;
   }
   
-  public static boolean isOperator(char o) {
+  public static boolean isOperator(char o) 
+  {
      char [] operators = {'+', '-', '*','/', '%','<','>','=','&','|'};
-     for (int x=0; x<operators.length; x++) {
-      if (o == operators[x]) return true;      
+     for (int x=0; x<operators.length; x++) 
+     {
+      if (o == operators[x])
+          return true;      
      }
      return false;
   }
